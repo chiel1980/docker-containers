@@ -1,0 +1,27 @@
+ironmanproxy:
+   restart: always
+   build: /usr/local/docker-builds/IRONMAN/ironman-proxy
+   mem_limit: 64m
+   links: 
+    - ironmanapp 
+   ports:
+     - "80:80"
+     - "443:443"
+   volumes:
+    - /etc/ssl:/etc/ssl
+ironmanapp:
+   restart: always
+   mem_limit: 128m
+   build: /usr/local/docker-builds/IRONMAN/ironman-app
+   volumes:
+    - /webapp:/webapp
+    - /home/django:/home/django
+xmpp:
+   restart: always
+   build: /usr/local/docker-builds/IRONMAN/ironman-xmpp
+   mem_limit: 96m
+   ports:
+     - "5222:5222"
+   volumes:
+    - /var/lib/prosody:/var/lib/prosody
+    - /etc/prosody/certs:/etc/prosody/certs

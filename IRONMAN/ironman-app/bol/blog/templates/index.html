@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Welcome to the PragmaSEC blog{% endblock %}
+
+{% block content %}
+
+This is the blog of me - Michiel van Es - a security enthusiast.<br>
+I like to write about technology and give an opinion from time to time ;)<br>
+Feel free to drop me a line at $initials@pragmasec.nl,XMPP me at $initials@chat.pragmasec.nl or link me at https://nl.linkedin.com/in/michielvanes
+
+    <h2>Categories</h2>
+    {% if categories %}
+        <ul>
+        {% for category in categories %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no posts.</p>
+    {% endif %}
+
+    <h2>Posts</h2>
+    {% if posts %}
+        <ul>
+        {% for post in posts %}
+            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no posts.</p>
+    {% endif %}
+
+{% endblock %}
