@@ -2,8 +2,8 @@ ironmanproxy:
    restart: always
    build: /usr/local/docker-builds/IRONMAN/ironman-proxy
    mem_limit: 64m
-   links: 
-    - ironmanapp 
+   links:
+    - ironmanapp
    ports:
      - "80:80"
      - "443:443"
@@ -19,9 +19,19 @@ ironmanapp:
 xmpp:
    restart: always
    build: /usr/local/docker-builds/IRONMAN/ironman-xmpp
-   mem_limit: 96m
+   mem_limit: 128m
    ports:
      - "5222:5222"
    volumes:
     - /var/lib/prosody:/var/lib/prosody
     - /etc/prosody/certs:/etc/prosody/certs
+xmppbot:
+   restart: always
+   build: /usr/local/docker-builds/IRONMAN/ironman-xmpp-bot
+   mem_limit: 64m
+   links:
+    - xmpp
+   volumes:
+    - /etc/err-plugins:/etc/err-plugins
+    - /var/lib/err:/var/lib/err
+    - /var/log/err:/var/log/err
