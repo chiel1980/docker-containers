@@ -28,3 +28,6 @@ please be aware that you need:
 * Atlassian JIRA: https://www.atlassian.com/software/jira
 * jirash: https://github.com/trentm/jirash
 
+# Todo
+* add dashboard to repo
+* make it an app only setup instead of also including rainloop webmail for personal use ;)
