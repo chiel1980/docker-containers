@@ -22,9 +22,9 @@ please be aware that you need:
 * jirash or something similar for talking to the JIRA API
 
 # Sources of information
-Docker: https://www.django.com
-Django: https://www.djangoproject.com
-AdminLTE: https://almsaeedstudio.com/preview
-Atlassian JIRA: https://www.atlassian.com/software/jira
-jirash: https://github.com/trentm/jirash
+* Docker: https://www.django.com
+* Django: https://www.djangoproject.com
+* AdminLTE: https://almsaeedstudio.com/preview
+* Atlassian JIRA: https://www.atlassian.com/software/jira
+* jirash: https://github.com/trentm/jirash
 
