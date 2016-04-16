@@ -1,0 +1,49 @@
+ironmanproxy:
+   restart: always
+   build: /usr/local/docker-builds/IRONMAN/ironman-proxy
+   mem_limit: 128m
+   links: 
+    - ironmanapp 
+    - rocketchat
+    - ironmanwebmail 
+   ports:
+     - "80:80"
+     - "443:443"
+   volumes:
+    - /var/local/nginx/certs:/etc/nginx/certs
+    - /etc/letsencrypt:/etc/letsencrypt
+ironmanapp:
+   restart: always
+   mem_limit: 128m
+   build: /usr/local/docker-builds/IRONMAN/ironman-app
+   volumes:
+    - /webapp:/webapp
+# we push the app in the containers se we can do versioning
+#    - /home/django:/home/django
+mongo:
+   restart: always
+   mem_limit: 128m
+   image: mongo
+   volumes:
+     - /data/runtime/db:/data/db
+     - /data/dump:/dump
+   command: mongod --smallfiles --oplogSize 128
+rocketchat:
+   restart: always
+   mem_limit: 228m
+   image: rocketchat/rocket.chat:develop
+   volumes:
+     - /var/uploads:/app/uploads
+   environment:
+     - PORT=3000
+     - ROOT_URL=https://chat.pragmasec.nl
+     - MONGO_URL=mongodb://mongo:27017/rocketchat
+     - DDP_DEFAULT_CONNECTION_URL=https://chat.pragmasec.nl
+   links:
+     - mongo:mongo
+ironmanwebmail:
+   restart: always
+   mem_limit: 128m
+   build: /usr/local/docker-builds/IRONMAN/ironman-webmail
+   volumes:
+     - /webmail/rainloop_data:/usr/share/rainloop/data
